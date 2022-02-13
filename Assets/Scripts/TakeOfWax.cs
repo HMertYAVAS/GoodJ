@@ -7,7 +7,10 @@ using DG.Tweening;
 
 public class TakeOfWax : MonoBehaviour
 {
+
     MDM_Bend mDM_Bend;
+    
+
 
     private void Start()
     {
@@ -17,12 +20,17 @@ public class TakeOfWax : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (Input.touchCount > 0 || Input.GetMouseButton(0))
+            StartCoroutine(BlendEtc());
+    }
 
 
     IEnumerator BlendEtc()
     {
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         if (mDM_Bend.ppValue < 0.14)
         {
             mDM_Bend.ppBendDirection = MDM_Bend.Direction_.Z;
@@ -30,12 +38,8 @@ public class TakeOfWax : MonoBehaviour
         }
         else
         {
-            transform.DOMove(new Vector3(4, 4, 4), 12);
+                transform.parent.transform.DOMove(new Vector3(4, 4, 4), 12);
         }
     }
 
-    private void Update()
-    {
-        StartCoroutine(BlendEtc());
-    }
 }
